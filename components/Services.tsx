@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { AiDevIcon } from './icons/AiDevIcon';
 import { CybersecurityIcon } from './icons/CybersecurityIcon';
@@ -33,24 +34,24 @@ const services: Service[] = [
     }
 ];
 
-const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
-    <div className="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
+const ServiceCard: React.FC<{ service: Service }> = React.memo(({ service }) => (
+    <div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
         <div className="text-blue-500 mb-4">
             {service.icon}
         </div>
-        <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
-        <p className="text-gray-400">{service.description}</p>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{service.title}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{service.description}</p>
     </div>
-);
+));
 
 
 const Services: React.FC = () => {
     return (
-        <section id="services" className="py-20 bg-gray-900">
+        <section id="services" className="py-20 bg-white dark:bg-gray-900">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-extrabold text-white">Our Services</h2>
-                    <p className="text-lg text-gray-400 mt-4">We offer a comprehensive suite of technology services.</p>
+                    <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">Our Services</h2>
+                    <p className="text-lg text-gray-500 dark:text-gray-400 mt-4">We offer a comprehensive suite of technology services.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {services.map((service, index) => (

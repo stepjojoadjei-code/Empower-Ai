@@ -1,8 +1,11 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
+if (!process.env.API_KEY) {
+    throw new Error("API_KEY environment variable not set. Please add it to your environment.");
+}
+
 // As per guidelines, the API key must be from process.env.API_KEY.
-// This application assumes the environment variable is configured.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 let chat: Chat | null = null;
 
@@ -11,7 +14,7 @@ async function initializeChat(): Promise<Chat> {
         return chat;
     }
     
-    // Fix: Using the recommended 'gemini-2.5-flash' model for general text tasks.
+    // Using the recommended 'gemini-2.5-flash' model for general text tasks.
     chat = ai.chats.create({
         model: 'gemini-2.5-flash',
         config: {
@@ -28,7 +31,7 @@ export async function startNewChat() {
 export async function sendMessageToAI(message: string): Promise<AsyncIterable<GenerateContentResponse>> {
     const currentChat = await initializeChat();
     
-    // Fix: Using sendMessageStream for streaming chat responses.
+    // Using sendMessageStream for streaming chat responses.
     const result = await currentChat.sendMessageStream({ message });
     return result;
 }
